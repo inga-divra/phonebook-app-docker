@@ -13,7 +13,7 @@ RUN npm run build
 FROM node:20-alpine AS backend-build
 WORKDIR /app
 
-# install backend deps from ROOT package.json (у тебя он в корне)
+# install backend deps from ROOT package.json 
 COPY package*.json ./
 RUN npm install
 
