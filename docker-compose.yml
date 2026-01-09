@@ -1,0 +1,27 @@
+services:
+  frontend:
+    image: phonebook-app-frontend
+    container_name: phonebook-frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+  backend:
+    image: phonebook-app-backend
+    container_name: phonebook-backend-prod
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:1.20.1
+    container_name: phonebook-nginx-prod
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend

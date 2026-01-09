@@ -1,0 +1,33 @@
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - "3000:3000"
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: backend/dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    env_file:
+      - .env
+    ports:
+      - "3001:3001"
+
+  nginx:
+    image: nginx:1.20.1
+    container_name: nginx-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend

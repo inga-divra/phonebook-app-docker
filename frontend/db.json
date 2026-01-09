@@ -1,0 +1,34 @@
+{
+  "persons": [
+    {
+      "id": "5899",
+      "name": "Ada Lovelace",
+      "number": "+358-444444"
+    },
+    {
+      "id": "74dc",
+      "name": "Mary Poppendieck",
+      "number": "39-23-6423122"
+    },
+    {
+      "id": "8fd3",
+      "name": "Mikko Virtanen",
+      "number": "04000000"
+    },
+    {
+      "id": "d83a",
+      "name": "Laura Mäkinen",
+      "number": "050 987 6543"
+    },
+    {
+      "id": "2e0a",
+      "name": "Janne Lahtinen",
+      "number": "041 876 5432"
+    },
+    {
+      "id": "e1c4",
+      "name": "Riikka Nieminen",
+      "number": "044 234 5678"
+    }
+  ]
+}
