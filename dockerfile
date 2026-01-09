@@ -25,7 +25,8 @@ COPY backend ./backend
 FROM nginx:1.25-alpine
 
 # frontend build -> nginx html
-COPY --from=frontend-build /app/frontend/build /usr/share/nginx/html
+COPY --from=frontend-build /app/frontend/dist /usr/share/nginx/html
+
 
 # nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
