@@ -13,7 +13,7 @@ RUN npm run build
 FROM node:20-alpine AS backend-build
 WORKDIR /app
 
-# install backend deps from ROOT package.json
+# install backend deps from ROOT package.json (у тебя он в корне)
 COPY package*.json ./
 RUN npm install
 
@@ -24,10 +24,17 @@ COPY backend ./backend
 # ---------- production ----------
 FROM nginx:1.25-alpine
 
+# frontend build -> nginx html
 COPY --from=frontend-build /app/frontend/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=backend-build /app/backend /app/backend
 
+# nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# backend source + dependencies
+COPY --from=backend-build /app/backend /app/backend
+COPY --from=backend-build /app/node_modules /app/node_modules
+
+# node runtime for backend
 RUN apk add --no-cache nodejs npm
 
 WORKDIR /app/backend
