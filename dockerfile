@@ -11,12 +11,14 @@ RUN npm run build
 
 # ---------- backend build ----------
 FROM node:20-alpine AS backend-build
-WORKDIR /app/backend
+WORKDIR /app
 
-COPY backend/package*.json ./
+# install backend deps from ROOT package.json
+COPY package*.json ./
 RUN npm install
 
-COPY backend .
+# copy backend source
+COPY backend ./backend
 
 
 # ---------- production ----------
